@@ -10,7 +10,7 @@ library(datasets)
 library(pacman)
 pacman::p_load(pacman, dplyr, GGally, ggplot2, ggthemes, ggvis,
                httr, plotly, rio, rmarkdown, shiny, stringr, tidyr,
-               tidyverse)
+               tidyverse, knitr)
 
 # Clear packages
 p_unload(all) # Pacman packages.

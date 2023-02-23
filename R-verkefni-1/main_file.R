@@ -86,3 +86,30 @@ mynd2j <- ggplot(HS, aes(x=birtm2, y=kaupverd)) +
 mynd2j
 
 ### Hluti 3 ###
+
+# Create table showing number of properties in each neigbourhood
+#  by type of property.[3k]
+table3k <- xtabs(~teg_eign_s_i+matssvaedi, data = HS)
+kable(table3k, "simple")
+
+# Create table showing percentage of properties in each neigbourhood
+#  by type of property.[3l]
+kable(round(100*prop.table(table3k, margin=2)), "simple")
+
+# Create table showing mean, median, and SD of price per km^2, as well as
+#  number of properties, grouped by neighbourhood and type of property.[3m]
+df3m <- HS %>% 
+  group_by(matssvaedi, teg_eign_s_i) %>%
+  summarise(meðaltal=mean(fermetraverd),
+            miðgildi=median(fermetraverd),
+            staðalfravik=sd(fermetraverd),
+            count=n(),
+            .groups = 'drop') %>%
+  as.data.frame()
+kable(df3m, "simple", col.names = 
+        c("Hverfi", "Tegund eignar", 
+          "Meðaltal fermetraverðs", "Miðgildi fermetraverðs", 
+          "Staðalfrávik fermetraverðs", "Fjöldi eigna"))
+
+### Hluti 4 ###
+
